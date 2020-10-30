@@ -2,6 +2,8 @@ package br.com.challenge.controller;
 
 import java.net.URI;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -37,12 +39,12 @@ public class ProdutoController {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<?> findById(@PathVariable Long id) {
+	public ResponseEntity<ProdutoDTO> findById(@PathVariable Long id) {
 		return ResponseEntity.ok(modelMapper.convert(produtoService.findById(id), ProdutoDTO.class));
 	}
 
 	@PostMapping
-	public ResponseEntity<ProdutoDTO> save(@RequestBody ProdutoDTO produtoDTO, UriComponentsBuilder uriBuilder) {
+	public ResponseEntity<ProdutoDTO> save(@RequestBody @Valid ProdutoDTO produtoDTO, UriComponentsBuilder uriBuilder) {
 		Produto produto = produtoService.save(modelMapper.convert(produtoDTO, Produto.class));
 
 		URI uri = uriBuilder.path("/produto/{id}").buildAndExpand(produto.getId()).toUri();

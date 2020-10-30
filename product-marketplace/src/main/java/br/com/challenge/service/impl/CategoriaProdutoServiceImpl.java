@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import br.com.challenge.model.CategoriaProduto;
 import br.com.challenge.repository.CategoriaProdutoRepository;
 import br.com.challenge.service.CategoriaProdutoService;
+import br.com.challenge.util.exception.ResourceNotFoundException;
 
 @Service
 public class CategoriaProdutoServiceImpl implements CategoriaProdutoService {
@@ -24,7 +25,7 @@ public class CategoriaProdutoServiceImpl implements CategoriaProdutoService {
 	private void existsCategoriaProduto(Long id) {
 
 		if (Objects.isNull(id) || categoriaProdutoRepository.findById(id).orElse(null) == null) {
-
+			throw new ResourceNotFoundException("Nenhuma categoria encontrada");
 		}
 	}
 }

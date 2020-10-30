@@ -11,6 +11,7 @@ import br.com.challenge.model.Produto;
 import br.com.challenge.repository.ProdutoRepository;
 import br.com.challenge.service.CategoriaProdutoService;
 import br.com.challenge.service.ProdutoService;
+import br.com.challenge.util.exception.ResourceNotFoundException;
 
 @Service
 public class ProdutoServiceImpl implements ProdutoService {
@@ -25,7 +26,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 		Page<Produto> produtos = produtoRepository.findAll(pageable);
 
 		if (produtos.isEmpty()) {
-
+			throw new ResourceNotFoundException("Nenhum produto encontrado");
 		}
 		return produtos;
 	}
@@ -49,8 +50,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 
 	private void existsProduct(Long id) {
 		if (Objects.isNull(id) || produtoRepository.findById(id).orElse(null) == null) {
-			return;
+			throw new ResourceNotFoundException("Nenhum produto encontrado");
 		}
-
 	}
 }

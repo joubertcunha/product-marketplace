@@ -25,10 +25,10 @@ public class CustomExceptionHandler {
 	private MessageSource messageSource;
 
 	@ExceptionHandler(ResourceNotFoundException.class)
-	public final ResponseEntity<Object> handleHeaderException(ResourceNotFoundException ex, WebRequest request) {
+	public ResponseEntity<Object> handleHeaderException(ResourceNotFoundException ex, WebRequest request) {
 		HttpStatus status = HttpStatus.NOT_FOUND;
 
-		return new ResponseEntity(new ErroExceptionDTO(status.name(), Arrays.asList(ex.getLocalizedMessage())), status);
+		return new ResponseEntity(new ErroExceptionDTO(status.value(), status.getReasonPhrase(), Arrays.asList(ex.getLocalizedMessage())), status);
 	}
 
 	@ExceptionHandler(MethodArgumentNotValidException.class)
@@ -40,13 +40,13 @@ public class CustomExceptionHandler {
 				.collect(Collectors.toList());
 
 		HttpStatus status = HttpStatus.BAD_REQUEST;
-		return new ResponseEntity(new ErroExceptionDTO(status.name(), details), status);
+		return new ResponseEntity(new ErroExceptionDTO(status.value(), status.getReasonPhrase(), details), status);
 	}
 
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<Object> handleAllExceptions(Exception ex, WebRequest request) {
 		HttpStatus status = HttpStatus.INTERNAL_SERVER_ERROR;
 
-		return new ResponseEntity(new ErroExceptionDTO(status.name(), Arrays.asList(ex.getLocalizedMessage())), status);
+		return new ResponseEntity(new ErroExceptionDTO(status.value(), status.getReasonPhrase(), Arrays.asList(ex.getLocalizedMessage())), status);
 	}
 }

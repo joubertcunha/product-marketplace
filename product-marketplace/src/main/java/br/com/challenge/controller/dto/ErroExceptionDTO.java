@@ -8,14 +8,17 @@ import lombok.Data;
 @Data
 public class ErroExceptionDTO {
 
-	private String erro;
-	
+	private int status;
+
+	private String mensagem;
+
 	private LocalDateTime data;
 
 	private List<String> detalhe;
 
-	public ErroExceptionDTO(String erro, List<String> detalhe) {
-		this.erro = erro;
+	public ErroExceptionDTO(int status, String mensagem, List<String> detalhe) {
+		this.status = status;
+		this.mensagem = mensagem;
 		this.detalhe = detalhe;
 		this.data = LocalDateTime.now();
 	}

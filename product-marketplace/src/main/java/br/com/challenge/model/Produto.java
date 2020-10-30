@@ -20,10 +20,10 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Entity
 @Table(name = "produto")
-public class Produto {
+public class Produto extends Auditable<String> {
 
 	@EqualsAndHashCode.Include
 	@Id
@@ -39,7 +39,7 @@ public class Produto {
 
 	@Column(name = "valor_produto")
 	private Double valorProduto;
-	
+
 	@Column
 	private Integer score;
 

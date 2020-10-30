@@ -3,6 +3,7 @@ package br.com.challenge.model;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -45,7 +46,7 @@ public class Produto {
 	@Column(name = "data_insercao")
 	private LocalDateTime dataInsercao;
 
-	@ManyToOne
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "id_categoria_produto")
 	private CategoriaProduto categoriaProduto;
 

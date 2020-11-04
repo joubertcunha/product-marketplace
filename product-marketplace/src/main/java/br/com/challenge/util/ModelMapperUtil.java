@@ -3,10 +3,15 @@ package br.com.challenge.util;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.apache.commons.lang3.StringUtils;
 import org.modelmapper.ModelMapper;
+import org.modelmapper.PropertyMap;
 import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
+
+import br.com.challenge.controller.dto.ArticlesDTO;
+import br.com.challenge.model.Noticia;
 
 @Component
 public class ModelMapperUtil {
@@ -23,9 +28,35 @@ public class ModelMapperUtil {
 		return objPage.map(item -> getModelMapper().map(item, objClass));
 	}
 
+	public Noticia convertNewsApi(ArticlesDTO articlesDTO, Class<Noticia> noticia) {
+		return getModelMapperNewsApi().map(articlesDTO, noticia);
+	}
+
 	private ModelMapper getModelMapper() {
 		ModelMapper modelMapper = new ModelMapper();
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT);
+		return modelMapper;
+	}
+
+	private ModelMapper getModelMapperNewsApi() {
+		ModelMapper modelMapper = getModelMapper();
+		modelMapper.addMappings(new PropertyMap<ArticlesDTO, Noticia>() {
+			@Override
+			protected void configure() {
+				map().setAutor(source.getAuthor());
+				map().setTitulo(source.getTitle());
+				map().setDescricao(source.getDescription());
+				map().setConteudo(source.getContent());
+				map().setUrl(source.getUrl());
+				map().setDataPublicada(source.getPublishedAt());
+			}
+		}).setPostConverter(context -> {
+			Noticia noticia = context.getDestination();
+			noticia.setConteudo(StringUtils.truncate(noticia.getConteudo(), 10));
+			noticia.setDescricao(StringUtils.truncate(noticia.getDescricao(), 10));
+			
+			return noticia;
+		});
 		return modelMapper;
 	}
 }

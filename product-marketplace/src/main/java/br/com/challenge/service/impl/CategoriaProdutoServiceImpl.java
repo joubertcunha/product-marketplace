@@ -1,5 +1,6 @@
 package br.com.challenge.service.impl;
 
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,21 @@ public class CategoriaProdutoServiceImpl implements CategoriaProdutoService {
 		return categoriaProdutoRepository.getOne(id);
 	}
 
+	@Override
+	public List<CategoriaProduto> findAll() {
+		List<CategoriaProduto> categorias = categoriaProdutoRepository.findAll();
+
+		if (categorias.isEmpty()) {
+			throw new ResourceNotFoundException("Nenhuma categoria encontrada");
+		}
+		return categorias;
+	}
+
 	private void existsCategoriaProduto(Long id) {
 
 		if (Objects.isNull(id) || categoriaProdutoRepository.findById(id).orElse(null) == null) {
 			throw new ResourceNotFoundException("Nenhuma categoria encontrada");
 		}
 	}
+
 }

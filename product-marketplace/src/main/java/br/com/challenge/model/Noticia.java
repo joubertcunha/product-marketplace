@@ -1,6 +1,6 @@
 package br.com.challenge.model;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -27,25 +29,26 @@ public class Noticia {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_noticia")
 	private Long id;
-	
+
 	@Column
-	private String author;
-	
+	private String autor;
+
 	@Column
-	private String title;
-	
+	private String titulo;
+
 	@Column
-	private String description;
-	
+	private String descricao;
+
 	@Column
 	private String url;
-	
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "data_publicada")
+	private Date dataPublicada;
+
 	@Column
-	private LocalDateTime publishedAt;
-	
-	@Column
-	private String content;
-	
+	private String conteudo;
+
 	@ManyToOne
 	@JoinColumn(name = "id_categoria_produto")
 	private CategoriaProduto categoriaProduto;

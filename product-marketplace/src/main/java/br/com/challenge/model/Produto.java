@@ -3,12 +3,12 @@ package br.com.challenge.model;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -24,7 +24,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = false)
 @Entity
-@Table(name = "produto")
+@Table(name = "produto", indexes = { @Index(name = "IDX_PRODUTO_01", columnList = "nome"),
+									 @Index(name = "IDX_PRODUTO_02", columnList = "id_categoria_produto")})
 public class Produto extends Auditable<String> {
 
 	@EqualsAndHashCode.Include
@@ -47,7 +48,7 @@ public class Produto extends Auditable<String> {
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "data_cadastro")
-	private Date datacadastro;
+	private Date dataCadastro;
 
 	@ManyToOne
 	@JoinColumn(name = "id_categoria_produto")

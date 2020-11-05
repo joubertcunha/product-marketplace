@@ -55,7 +55,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 
 	@Override
 	public Produto save(Produto produto) {
-		produto.setDatacadastro(new Date());
+		produto.setDataCadastro(new Date());
 		produto.setCategoriaProduto(categoriaProdutoService.findById(produto.getCategoriaProduto().getId()));
 		return produtoRepository.save(produto);
 	}
@@ -65,6 +65,16 @@ public class ProdutoServiceImpl implements ProdutoService {
 		existsProduct(id);
 
 		produtoRepository.deleteById(id);
+	}
+	
+	public Page<Produto> obterProdutosRanqueados(String termoPesquisado, Pageable pageable) {
+		Page<Produto> produtos = produtoRepository.findByNomeContains(termoPesquisado, pageable);
+		
+		if(produtos.isEmpty()) {
+			throw new ResourceNotFoundException("Nenhum produto encontrado");
+		}
+		
+		return produtos;
 	}
 
 	@Override
@@ -95,7 +105,7 @@ public class ProdutoServiceImpl implements ProdutoService {
 	// Y = Quantidade de vendas/dias que o produto existe
 	private BigDecimal calcularValorY(Produto produto) {
 		 long qtdVendas = vendaService.obterQuantidadeVendasProduto(produto).longValue();
-		 long qtdDiasProdutoCadastrado = ChronoUnit.DAYS.between(produto.getDatacadastro().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), LocalDate.now());
+		 long qtdDiasProdutoCadastrado = ChronoUnit.DAYS.between(produto.getDataCadastro().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(), LocalDate.now());
 		 
 		 if(qtdDiasProdutoCadastrado == 0) {
 			 return BigDecimal.ZERO;

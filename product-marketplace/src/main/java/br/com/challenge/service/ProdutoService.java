@@ -12,6 +12,8 @@ public interface ProdutoService {
 	Produto findById(Long id);
 
 	Produto save(Produto produto);
+	
+	Page<Produto> obterProdutosRanqueados(String termoPesquisado, Pageable pageable);
 
 	void deleteById(Long id);
 	

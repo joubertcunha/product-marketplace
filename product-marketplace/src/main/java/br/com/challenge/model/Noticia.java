@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -21,7 +22,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-@Table(name = "noticia")
+@Table(name = "noticia", indexes = {@Index(name = "IDX_NOTICIA_01", columnList = "id_categoria_produto, data_publicada")})
 public class Noticia {
 
 	@EqualsAndHashCode.Include

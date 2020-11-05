@@ -13,7 +13,7 @@ public class NewsApiTasks {
 	private NoticiaService noticiaService;
 
 	@Scheduled(cron = "*/10 * * * * *")
-	public void teste() {
+	public void newsApiDownload() {
 		noticiaService.newsApiDownload();
 	}
 }

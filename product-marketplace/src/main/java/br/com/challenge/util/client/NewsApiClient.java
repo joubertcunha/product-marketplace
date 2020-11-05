@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import br.com.challenge.controller.dto.NewsApiDTO;
 
-@FeignClient(name = "newsApiClient", url = "https://newsapi.org/")
+@FeignClient(name = "newsApiClient", url = "https://newsapi.org/", fallback = NewsAPiFallback.class)
 public interface NewsApiClient {
 
 	@GetMapping(value = "/v2/everything")

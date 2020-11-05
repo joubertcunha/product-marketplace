@@ -16,6 +16,8 @@ public class ProdutoDTO {
 
 	@NotBlank(message = "o campo descrição deve ser preenchido.")
 	private String descricao;
+	
+	private Double valorProduto;
 
 	private CategoriaProdutoDTO categoriaProduto;
 

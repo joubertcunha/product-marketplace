@@ -12,7 +12,7 @@ public class NewsApiTasks {
 	@Autowired
 	private NoticiaService noticiaService;
 
-	@Scheduled(cron = "*/10 * * * * *")
+//	@Scheduled(cron = "*/10 * * * * *")
 	public void newsApiDownload() {
 		noticiaService.newsApiDownload();
 	}

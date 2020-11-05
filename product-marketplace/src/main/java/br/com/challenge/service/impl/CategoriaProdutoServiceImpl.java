@@ -17,6 +17,7 @@ public class CategoriaProdutoServiceImpl implements CategoriaProdutoService {
 	@Autowired
 	CategoriaProdutoRepository categoriaProdutoRepository;
 
+	@Override
 	public CategoriaProduto findById(Long id) {
 		existsCategoriaProduto(id);
 

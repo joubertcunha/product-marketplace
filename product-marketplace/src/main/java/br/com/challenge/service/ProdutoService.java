@@ -14,4 +14,6 @@ public interface ProdutoService {
 	Produto save(Produto produto);
 
 	void deleteById(Long id);
+	
+	void calcularScoreProduto();
 }

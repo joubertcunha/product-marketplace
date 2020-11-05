@@ -1,6 +1,10 @@
 package br.com.challenge.service.impl;
 
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +38,7 @@ public class NoticiaServiceImpl implements NoticiaService {
 	@Autowired
 	private ModelMapperUtil modelMapper;
 
+	@Override
 	public void newsApiDownload() {
 		DateTimeFormatter ofPattern = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
 		NewsApiDTO newsApi = null;
@@ -56,6 +61,16 @@ public class NoticiaServiceImpl implements NoticiaService {
 				});
 			}
 		}
+	}
+	
+	@Override
+	public Integer obterQuantidadeNoticiasCategoriaProdutoDia(CategoriaProduto categoriaProduto) {
+		LocalDateTime dataInicio = LocalDateTime.now().with(LocalTime.MIDNIGHT).plusDays(-1);
+		LocalDateTime dataFim = dataInicio.withHour(23).withMinute(59).withSecond(59);
+
+		return noticiaRepository.obterQuantidadeNoticiaCategoria(categoriaProduto.getId(),
+				Date.from(dataInicio.atZone(ZoneId.systemDefault()).toInstant()),
+				Date.from(dataFim.atZone(ZoneId.systemDefault()).toInstant()));
 	}
 
 }

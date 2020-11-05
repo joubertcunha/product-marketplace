@@ -1,6 +1,6 @@
 package br.com.challenge.model;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,6 +13,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -41,15 +43,16 @@ public class Produto extends Auditable<String> {
 	private Double valorProduto;
 
 	@Column
-	private Integer score;
+	private Double score;
 
-	@Column(name = "data_insercao")
-	private LocalDateTime dataInsercao;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "data_cadastro")
+	private Date datacadastro;
 
-	@ManyToOne(cascade = CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "id_categoria_produto")
 	private CategoriaProduto categoriaProduto;
 
-	@OneToMany
+	@OneToMany(mappedBy = "produto")
 	private List<Venda> vendas;
 }

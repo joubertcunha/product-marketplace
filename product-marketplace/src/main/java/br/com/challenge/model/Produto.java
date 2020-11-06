@@ -54,6 +54,6 @@ public class Produto extends Auditable<String> {
 	@JoinColumn(name = "id_categoria_produto")
 	private CategoriaProduto categoriaProduto;
 
-	@OneToMany(mappedBy = "produto")
+	@OneToMany(mappedBy = "produto", orphanRemoval = true)
 	private List<Venda> vendas;
 }

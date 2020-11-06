@@ -12,7 +12,12 @@ public class DailyScoreTasks {
 	@Autowired
 	private ProdutoService produtoService;
 
-//	@Scheduled(cron = "*/10 * * * * *")
+	/**
+	*  O job deverá ser executado 1 veze ao dia, calculando o score do dia anterior.:
+	*  00:10 irá calcular o score dos produtos no dia anterior.
+	**/
+	// TODO Scheduled para testes
+	@Scheduled(cron = "*/50 * * * * *")
 	public void calcularScoreProduto() {
 		produtoService.calcularScoreProduto();
 	}

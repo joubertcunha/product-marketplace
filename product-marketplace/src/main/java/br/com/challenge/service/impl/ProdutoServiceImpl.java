@@ -64,8 +64,11 @@ public class ProdutoServiceImpl implements ProdutoService {
 	public Produto update(Long id, Produto produto) {
 		existsProduct(id);
 		
-		produto.setId(id);
-		return produtoRepository.save(produto);
+		Produto produtoAlterado = produtoRepository.getOne(id);
+		produtoAlterado.setNome(produto.getNome());
+		produtoAlterado.setDescricao(produto.getDescricao());
+		produtoAlterado.setScore(produto.getScore());
+		return produtoRepository.save(produtoAlterado);
 	}	
 
 	@Override

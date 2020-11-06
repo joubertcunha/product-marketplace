@@ -34,20 +34,20 @@ public class Produto extends Auditable<String> {
 	@Column(name = "id_produto")
 	private Long id;
 
-	@Column
+	@Column(columnDefinition = "VARCHAR(70)", nullable = false)
 	private String nome;
 
-	@Column
+	@Column(columnDefinition = "VARCHAR(150)", nullable = false)
 	private String descricao;
 
-	@Column(name = "valor_produto")
+	@Column(name = "valor_produto", nullable = false)
 	private Double valorProduto;
 
 	@Column
 	private Double score;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "data_cadastro")
+	@Column(name = "data_cadastro", nullable = false)
 	private Date dataCadastro;
 
 	@ManyToOne

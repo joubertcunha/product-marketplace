@@ -31,23 +31,23 @@ public class Noticia {
 	@Column(name = "id_noticia")
 	private Long id;
 
-	@Column
+	@Column(columnDefinition = "VARCHAR(70)")
 	private String autor;
 
-	@Column
+	@Column(columnDefinition = "VARCHAR(100)")
 	private String titulo;
 
-	@Column
+	@Column(columnDefinition = "VARCHAR(150)")
 	private String descricao;
 
-	@Column
+	@Column(columnDefinition = "VARCHAR(150)")
 	private String url;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "data_publicada")
 	private Date dataPublicada;
 
-	@Column
+	@Column(columnDefinition = "VARCHAR(255)")
 	private String conteudo;
 
 	@ManyToOne

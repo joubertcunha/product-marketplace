@@ -65,7 +65,7 @@ public class NoticiaServiceImpl implements NoticiaService {
 	
 	@Override
 	public Integer obterQuantidadeNoticiasCategoriaProdutoDia(CategoriaProduto categoriaProduto) {
-		LocalDateTime dataInicio = LocalDateTime.now().with(LocalTime.MIDNIGHT).plusDays(-1);
+		LocalDateTime dataInicio = LocalDateTime.now().with(LocalTime.MIDNIGHT);
 		LocalDateTime dataFim = dataInicio.withHour(23).withMinute(59).withSecond(59);
 
 		return noticiaRepository.obterQuantidadeNoticiaCategoria(categoriaProduto.getId(),

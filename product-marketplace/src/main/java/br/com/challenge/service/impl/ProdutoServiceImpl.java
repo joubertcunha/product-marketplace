@@ -59,6 +59,14 @@ public class ProdutoServiceImpl implements ProdutoService {
 		produto.setCategoriaProduto(categoriaProdutoService.findById(produto.getCategoriaProduto().getId()));
 		return produtoRepository.save(produto);
 	}
+	
+	@Override
+	public Produto update(Long id, Produto produto) {
+		existsProduct(id);
+		
+		produto.setId(id);
+		return produtoRepository.save(produto);
+	}	
 
 	@Override
 	public void deleteById(Long id) {
@@ -130,4 +138,5 @@ public class ProdutoServiceImpl implements ProdutoService {
 			throw new ResourceNotFoundException("Nenhum produto encontrado");
 		}
 	}
+
 }

@@ -52,8 +52,11 @@ public class ModelMapperUtil {
 			}
 		}).setPostConverter(context -> {
 			Noticia noticia = context.getDestination();
-			noticia.setConteudo(StringUtils.truncate(noticia.getConteudo(), 10));
-			noticia.setDescricao(StringUtils.truncate(noticia.getDescricao(), 10));
+			noticia.setAutor(StringUtils.truncate(noticia.getConteudo(), 70));
+			noticia.setTitulo(StringUtils.truncate(noticia.getConteudo(), 100));
+			noticia.setUrl(StringUtils.truncate(noticia.getConteudo(), 150));
+			noticia.setConteudo(StringUtils.truncate(noticia.getConteudo(), 255));
+			noticia.setDescricao(StringUtils.truncate(noticia.getDescricao(), 150));
 			
 			return noticia;
 		});

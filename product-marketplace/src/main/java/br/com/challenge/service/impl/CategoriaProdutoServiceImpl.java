@@ -26,12 +26,7 @@ public class CategoriaProdutoServiceImpl implements CategoriaProdutoService {
 
 	@Override
 	public List<CategoriaProduto> findAll() {
-		List<CategoriaProduto> categorias = categoriaProdutoRepository.findAll();
-
-		if (categorias.isEmpty()) {
-			throw new ResourceNotFoundException("Nenhuma categoria encontrada");
-		}
-		return categorias;
+		return categoriaProdutoRepository.findAll();
 	}
 
 	private void existsCategoriaProduto(Long id) {

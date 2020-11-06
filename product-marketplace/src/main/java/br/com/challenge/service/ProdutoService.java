@@ -13,6 +13,8 @@ public interface ProdutoService {
 
 	Produto save(Produto produto);
 	
+	Produto update(Long id, Produto produto);
+	
 	Page<Produto> obterProdutosRanqueados(String termoPesquisado, Pageable pageable);
 
 	void deleteById(Long id);

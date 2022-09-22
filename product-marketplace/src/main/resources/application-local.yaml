@@ -1,0 +1,29 @@
+spring:
+  datasource:
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/marketplace-db?createDatabaseIfNotExist=true&useTimezone=true&serverTimezone=UTC&enabledTLSProtocols=TLSv1.2&&useSSL=false
+    username: user
+    password: password
+  jpa:
+    hibernate.ddl-auto: update
+    generate-ddl: true
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL57Dialect
+        format_sql: true
+
+feign:
+  hystrix:
+    enabled: true
+command:
+  default:
+    execution:
+      isolation:
+        thread:
+          timeoutInMilliseconds: 5000
+
+
+newsapi:
+  key:
+    value: 1846d24618ad4ac2af30d93510054dff
